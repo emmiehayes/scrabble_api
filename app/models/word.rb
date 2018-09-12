@@ -4,7 +4,19 @@ class Word
     @word = word 
   end 
 
-  def validate  
+  def validate
+    if call.first[:id] == @word
+      "'#{word_id}' is a valid word and its root form is '#{root_word}'." 
+    else 
+      "#{@word} is not a valid word."
+    end
+  end
+
+  def root_word 
+    call.first[:lexicalEntries][0][:inflectionOf][0][:text]
+  end
+
+  def call  
     @conn = Faraday.new(url: "https://od-api.oxforddictionaries.com") do |faraday|
       faraday.headers["accept"] = 'application/json'
       faraday.headers["app_id"] = ENV['app_id']
