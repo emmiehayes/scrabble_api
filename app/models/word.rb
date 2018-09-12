@@ -6,16 +6,16 @@ class Word
 
   def validate
     return "'#{@word}' is not a valid word." if response.status == 404
-    return "'#{word_id}' is a valid word and its root form is '#{root_word}'." if dictionary_word.first[:id] == @word
+    return "'#{word_id}' is a valid word and its root form is '#{root_word}'." if dictionary_data.first[:id] == @word
   end
 
   private
 
   def root_word 
-    dictionary_word.first[:lexicalEntries][0][:inflectionOf][0][:text]
+    dictionary_data.first[:lexicalEntries][0][:inflectionOf][0][:text]
   end
 
-  def dictionary_word  
+  def dictionary_data 
     JSON.parse(response.body, symbolize_names: true)[:results]
   end
   
