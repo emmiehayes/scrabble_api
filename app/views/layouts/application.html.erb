@@ -14,8 +14,17 @@
       <div class="logo sm-col-left">
         <%= link_to "ScrabbleWeb", root_url %>
       </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <%= form_tag :search, method: :get, class: "form-inline" do %>
+            <div class="form-group word-search">
+              <%= text_field_tag :word, "Word", class: "form-control" %>
+              <%= submit_tag "Validate Word", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </ul>
+      </div>
     </nav>
-
     <%= yield %>
   </body>
 </html>
