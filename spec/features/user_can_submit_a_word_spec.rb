@@ -25,7 +25,7 @@ describe 'as a guest user' do
 
   within('.word-search') do 
     # And I fill in a text box with "foxes"
-    fill_in 'search', with: 'Foxes'
+    fill_in 'word', with: 'Foxes'
     # And I click "Validate Word"
     click_on 'Validate Word'
   end
