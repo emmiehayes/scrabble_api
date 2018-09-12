@@ -14,6 +14,18 @@ class Play < ApplicationRecord
 
   private
 
-    def score_word
-    end
+   def score_word
+    return 0 if self.word.nil?
+    self.score = calculate_points(self.word)
+  end
+  
+  def calculate_points(word)
+    format_word(word).map do |letter|
+      letter_scores[letter]
+    end.sum
+  end
+
+  def format_word(word)
+    word.upcase.chars
+  end
 end
