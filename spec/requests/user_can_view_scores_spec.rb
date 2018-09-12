@@ -27,5 +27,11 @@ describe 'user sending GET request to "/api/v1/games/1"' do
     get "/api/v1/games/#{game.id}"
 
     expect(response).to be_successful
+
+    game_json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(game.id).to eq(game_json[:id])
+    expect(game.player_1.id).to eq(game_json[:player_1_id])
+    expect(game.player_2.id).to eq(game_json[:player_2_id])
   end
 end
