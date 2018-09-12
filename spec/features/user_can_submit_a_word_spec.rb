@@ -9,28 +9,40 @@
 # And I click "Validate Word"
 # Then I should see a message that says "'foxes' is a valid word and its root form is 'fox'."
 
-# As a guest user
-# When I visit "/"
-# And I fill in a text box with "foxez"
-# And I click "Validate Word"
-# Then I should see a message that says "'foxez' is not a valid word."
 
 require 'rails_helper'
 
 describe 'as a guest user' do
   scenario 'visiting the root path, I can submit a word for validation' do
-  # When I visit "/"
-
-  visit '/'
-
-  within('.word-search') do 
-    # And I fill in a text box with "foxes"
-    fill_in 'word', with: 'Foxes'
-    # And I click "Validate Word"
-    click_on 'Validate Word'
+    # When I visit "/"
+    
+    visit '/'
+    
+    within('.word-search') do 
+      # And I fill in a text box with "foxes"
+      fill_in 'word', with: 'Foxes'
+      # And I click "Validate Word"
+      click_on 'Validate Word'
+    end
+    
+    # Then I should see a message that says "'foxes' is a valid word and its root form is 'fox'."
+    expect(page).to have_content( "'foxes' is a valid word and its root form is 'fox'.")
   end
 
-  # Then I should see a message that says "'foxes' is a valid word and its root form is 'fox'."
-  expect(page).to have_content( "'foxes' is a valid word and its root form is 'fox'.")
+  scenario 'visiting the root path, I can submit an invalid word' do
+    # When I visit "/"
+     visit '/'
+    
+    within('.word-search') do 
+      # And I fill in a text box with "foxes"
+      fill_in 'word', with: 'foxez'
+      # And I click "Validate Word"
+      click_on 'Validate Word'
+    end
+
+    # Then I should see a message that says "'foxez' is not a valid word."
+    expect(page).to have_content( "'foxez' is not a valid word.")
   end
 end
+
+
